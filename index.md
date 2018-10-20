@@ -1,3 +1,3 @@
 Hi!
 
-![alt text](out/plots/todayPLUS4.png "plima")
+![alt text](out/plots/todayPLUS4.svg "plima")

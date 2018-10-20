@@ -79,19 +79,20 @@ mikroplot_final <- mijene_ready_todayPLUS4 %>%
 # write plot --------------------------------------------------------------
 
 # file_dir_plot.pdf <- here("out", "plots", "todayPLUS4.pdf")
-file_dir_plot.png <- here("out", "plots", "todayPLUS4.png")
+file_dir_plot.svg <- here("out", "plots", "todayPLUS4.svg")
+# file_dir_plot.png <- here("out", "plots", "todayPLUS4.png")
 
 # ggsave(file_dir_plot.pdf, plot = mikroplot_final,
 #        # device = "pdf",
 #        width = 8.27, height = 5.83, units = "in")
 
-ggsave(file_dir_plot.png, plot = mikroplot_final,
-       # device = "pdf",
-       width = 8.27, height = 5.83, units = "in")
-
-# ggsave(file_dir_plot.svg, plot = mikroplot_final,
-#        # device = "svg",
+# ggsave(file_dir_plot.png, plot = mikroplot_final,
+#        # device = "pdf",
 #        width = 8.27, height = 5.83, units = "in")
+
+ggsave(file_dir_plot.svg, plot = mikroplot_final,
+       device = "svg",
+       width = 8.27, height = 5.83, units = "in")
 
 
 
