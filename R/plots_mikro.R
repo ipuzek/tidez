@@ -53,10 +53,10 @@ mikroplot_final <- mijene_ready_todayPLUS4 %>%
   coord_cartesian(ylim = c(0.1, max(mijene$visina, na.rm = TRUE))) +
   scale_x_datetime(limits = c(anytime(Sys.Date()), anytime(Sys.Date() + 4)),
                    breaks = scales::pretty_breaks(n = 30),
-                   date_minor_breaks = "1 hour",
-                   labels = function(x) if_else(is.na(lag(x)) | !day(lag(x)) == day(x), 
-                                                paste(hour(x), "\n", nice_date(x), "  "),  #  wday(x, label = TRUE)), 
-                                                paste(hour(x)))) +
+                   date_minor_breaks = "1 hour") +
+                   # labels = function(x) if_else(is.na(lag(x)) | !day(lag(x)) == day(x),
+                   #                              paste(hour(x), "\n", nice_date(x), "  "),  #  wday(x, label = TRUE)),
+                   #                              paste(hour(x)))) +
   labs(subtitle = paste("Zadar --", "generated on:", Sys.time()),
        x = "", y = "razina mora") +
   theme_dark() +
