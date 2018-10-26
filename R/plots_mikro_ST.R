@@ -111,11 +111,10 @@ file_dir_plot.svg <- here("out", "plots", "todayPLUS4_ST.svg")
 #        # device = "pdf",
 #        width = 8.27, height = 5.83, units = "in")
 
-ggsave(file_dir_plot.svg, plot = mikroplot_final,
-       device = "svg",
-       width = 8.27, height = 5.83, units = "in")
+ggsejv(filename = file_dir_plot.svg,
+       plot = mikroplot_final,
+       AA = "A5.l")
 
-dev.off()
 
 
 # ggsave(here("out", "plots", "todayPLUS4.svg"), plot = mikroplot_final, device = "svg", width = 8.27, height = 5.83, units = "in")  #  

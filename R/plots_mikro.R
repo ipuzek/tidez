@@ -8,7 +8,7 @@ library(tibble)
 library(dplyr)
 
 ## nešto zeza ggsejv :(
-# source(here("R", "FUN_ggsejv.R"))
+source(here("R", "FUN_ggsejv.R"))
 
 mijene <- readRDS(here("podaci", "mijene_tidy.Rds"))
 lasci <- readRDS(here("podaci", "__lasci_tidy.Rds"))
@@ -117,12 +117,16 @@ file_dir_plot.svg <- here("out", "plots", "todayPLUS4.svg")
 #        # device = "pdf",
 #        width = 8.27, height = 5.83, units = "in")
 
-ggsave(file_dir_plot.svg, plot = mikroplot_final,
-       device = "svg",
-       width = 8.27, height = 5.83, units = "in")
+# ggsave(file_dir_plot.svg, plot = mikroplot_final,
+#        device = "svg",
+#        width = 8.27, height = 5.83, units = "in")
+# 
 
-dev.off()
+# dev.off()
 
+ggsejv(filename = file_dir_plot.svg,
+       plot = mikroplot_final,
+       AA = "A5.l")
 
 # ggsave(here("out", "plots", "todayPLUS4.svg"), plot = mikroplot_final, device = "svg", width = 8.27, height = 5.83, units = "in")  #  
 

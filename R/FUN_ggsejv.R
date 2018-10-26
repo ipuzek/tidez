@@ -1,5 +1,8 @@
 ggsejv <- function(..., AA) {
-    switch(AA,
+  
+  on.exit(dev.off())  
+  
+  switch(AA,
            A4.l = ggsave(..., width = 11.69, height = 8.27, units = "in"),
            A4.p = ggsave(..., width = 8.27, height = 11.69, units = "in"),
            A5.l = ggsave(..., width = 8.27, height = 5.83, units = "in"),
