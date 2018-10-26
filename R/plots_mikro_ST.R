@@ -10,8 +10,8 @@ library(dplyr)
 ## nešto zeza ggsejv :(
 # source(here("R", "FUN_ggsejv.R"))
 
-mijene <- readRDS(here("podaci", "mijene_tidy.Rds"))
-lasci <- readRDS(here("podaci", "__lasci_tidy.Rds"))
+mijene <- readRDS(here("podaci", "mijene_tidy_ST.Rds"))
+lasci <- readRDS(here("podaci", "__lasci_tidy_ST.Rds"))
 # 9 navecer et time manipulations ---------------------------------------------
 
 vri <- pull(mijene, vrijeme)
@@ -24,22 +24,18 @@ mijene_ready <- mijene %>%
     samo_vrijeme = strptime(vrijeme, "%Y-%m-%d %H:%M:%S") %>% format("%H:%M"),
     samo_vrijeme_plima = case_when(mijena == "oseka" ~ NA_character_,
                                    TRUE              ~ samo_vrijeme
-                                   )
     )
+  )
 
 nice_date <- function(x, plus = FALSE) {
-  
   if (plus) {
-    
     x.plus <- as.Date(x) + 1
     format(x.plus, "%d.%m.")
     
   } else {
-    
     as.Date(x) %>% format("%d.%m.")
     
   }
-  
 }
 
 # PLOT today + 4 --------------------------------------------------------------
@@ -48,7 +44,7 @@ mijene_ready_todayPLUS4 <- mijene_ready %>%
   arrange(vrijeme) %>% 
   thicken("day", by = "vrijeme") %>% 
   arrange(vrijeme_day)
-  # filter(vrijeme_day >= anydate(Sys.Date()) & vrijeme_day <= anydate(Sys.Date()) + 4)
+# filter(vrijeme_day >= anydate(Sys.Date()) & vrijeme_day <= anydate(Sys.Date()) + 4)
 
 lasci.dan <- lasci %>%
   # filter(dan >= anydate(Sys.Date()) & dan <= anydate(Sys.Date()) + 4) %>%
@@ -68,12 +64,10 @@ mikroplot_final <- mijene_ready_todayPLUS4 %>%
                    labels = function(x) if_else(is.na(lag(x)) | !day(lag(x)) == day(x),
                                                 paste(hour(x), "\n", nice_date(x, plus = TRUE), "  "),  #  wday(x, label = TRUE)),
                                                 paste(hour(x)))) +
-  labs(subtitle = paste("Zadar --", "generated on:", Sys.time()),
+  labs(subtitle = paste("Split --", "generated on:", Sys.time()),
        x = "", y = "razina mora") +
   theme_dark() +
   theme(axis.text.x=element_text(angle=45,hjust=1))
-
-# print(mikroplot_final)
 
 # other plot options ------------------------------------------------------
 
@@ -92,7 +86,7 @@ mikroplot_final <- mijene_ready_todayPLUS4 %>%
 # write plot --------------------------------------------------------------
 
 # file_dir_plot.pdf <- here("out", "plots", "todayPLUS4.pdf")
-file_dir_plot.svg <- here("out", "plots", "todayPLUS4.svg")
+file_dir_plot.svg <- here("out", "plots", "todayPLUS4_ST.svg")
 # file_dir_plot.png <- here("out", "plots", "todayPLUS4.png")
 
 # ggsave(file_dir_plot.pdf, plot = mikroplot_final,
