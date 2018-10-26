@@ -54,6 +54,20 @@ lasci.dan <- lasci %>%
   # filter(dan >= anydate(Sys.Date()) & dan <= anydate(Sys.Date()) + 4) %>%
   mutate(danUtjednu = lubridate::wday(dan, label = TRUE, week_start = 1))
 
+nau <- lubridate::now()
+lubridate::hour(nau) <- 0
+lubridate::minute(nau) <- 0
+
+dani_na_grafu <- c(
+  nau,
+  nau + 4*3600*24) %>% 
+  anytime()
+
+brejks <- seq.POSIXt(
+  from = dani_na_grafu[1],
+  to = dani_na_grafu[2],
+  by = "3 hour")
+
 mikroplot_final <- mijene_ready_todayPLUS4 %>% 
   ggplot() +
   geom_rect(data = lasci, aes(xmin = sunrise_tt, xmax = sunset_tt, ymin = 0, ymax = .6), alpha = .1, fill = "white") +
@@ -62,8 +76,8 @@ mikroplot_final <- mijene_ready_todayPLUS4 %>%
   ggalt::geom_xspline(aes(x = vrijeme, y = visina), colour = "grey80") +
   geom_vline(data = data_frame(sad = Sys.time()), aes(xintercept = sad)) +
   coord_cartesian(ylim = c(0.1, max(mijene$visina, na.rm = TRUE))) +
-  scale_x_datetime(limits = c(anytime(Sys.Date()), anytime(Sys.Date() + 4)),
-                   breaks = scales::pretty_breaks(n = 30),
+  scale_x_datetime(limits = dani_na_grafu,
+                   breaks = brejks,
                    date_minor_breaks = "1 hour",
                    labels = function(x) if_else(is.na(lag(x)) | !day(lag(x)) == day(x),
                                                 paste(hour(x), "\n", nice_date(x, plus = TRUE), "  "),  #  wday(x, label = TRUE)),
