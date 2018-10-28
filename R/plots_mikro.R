@@ -57,16 +57,17 @@ lasci.dan <- lasci %>%
 nau <- lubridate::now()
 lubridate::hour(nau) <- 0
 lubridate::minute(nau) <- 0
+lubridate::second(nau) <- 0
 
 dani_na_grafu <- c(
   nau,
-  nau + 4*3600*24) %>% 
+  nau + 3*3600*24) %>% 
   anytime()
 
-brejks <- seq.POSIXt(
-  from = dani_na_grafu[1],
-  to = dani_na_grafu[2],
-  by = "3 hour")
+# brejks <- seq.POSIXt(
+#   from = dani_na_grafu[1],
+#   to = dani_na_grafu[2],
+#   by = "3 hour")
 
 mikroplot_final <- mijene_ready_todayPLUS4 %>% 
   ggplot() +
@@ -77,17 +78,19 @@ mikroplot_final <- mijene_ready_todayPLUS4 %>%
   geom_vline(data = data_frame(sad = Sys.time()), aes(xintercept = sad)) +
   coord_cartesian(ylim = c(0.1, max(mijene$visina, na.rm = TRUE))) +
   scale_x_datetime(limits = dani_na_grafu,
-                   breaks = brejks,
-                   date_minor_breaks = "1 hour",
+                   # breaks = brejks,
+                   date_breaks = "3 hour",
+                   date_minor_breaks = "1 hour",  #  ,
                    labels = function(x) if_else(is.na(lag(x)) | !day(lag(x)) == day(x),
                                                 paste(hour(x), "\n", nice_date(x, plus = TRUE), "  "),  #  wday(x, label = TRUE)),
                                                 paste(hour(x)))) +
+                   # labels = scales::date_format("%b %d - %H:%M")) +
   labs(subtitle = paste("Zadar --", "generated on:", Sys.time()),
        x = "", y = "razina mora") +
   theme_dark() +
   theme(axis.text.x=element_text(angle=45,hjust=1))
 
-# print(mikroplot_final)
+print(mikroplot_final)
 
 # other plot options ------------------------------------------------------
 
