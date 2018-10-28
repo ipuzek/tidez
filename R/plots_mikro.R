@@ -81,16 +81,16 @@ mikroplot_final <- mijene_ready_todayPLUS4 %>%
                    # breaks = brejks,
                    date_breaks = "3 hour",
                    date_minor_breaks = "1 hour",  #  ,
-                   labels = function(x) if_else(is.na(lag(x)) | !day(lag(x)) == day(x),
-                                                paste(hour(x), "\n", nice_date(x, plus = TRUE), "  "),  #  wday(x, label = TRUE)),
-                                                paste(hour(x)))) +
-                   # labels = scales::date_format("%b %d - %H:%M")) +
+                   # labels = function(x) if_else(is.na(lag(x)) | !day(lag(x)) == day(x),
+                   #                              paste(hour(x), "\n", nice_date(x, plus = TRUE), "  "),  #  wday(x, label = TRUE)),
+                   #                              paste(hour(x))),
+                   labels = scales::date_format("%b %d - %H:%M")) +
   labs(subtitle = paste("Zadar --", "generated on:", Sys.time()),
        x = "", y = "razina mora") +
   theme_dark() +
   theme(axis.text.x=element_text(angle=45,hjust=1))
 
-print(mikroplot_final)
+# print(mikroplot_final)
 
 # other plot options ------------------------------------------------------
 

@@ -7,11 +7,11 @@ library(padr)
 library(tibble)
 library(dplyr)
 
-## nešto zeza ggsejv :(
-# source(here("R", "FUN_ggsejv.R"))
+source(here("R", "FUN_ggsejv.R"))
 
 mijene <- readRDS(here("podaci", "mijene_tidy_ST.Rds"))
 lasci <- readRDS(here("podaci", "__lasci_tidy_ST.Rds"))
+
 # 9 navecer et time manipulations ---------------------------------------------
 
 vri <- pull(mijene, vrijeme)
@@ -73,11 +73,13 @@ mikroplot_final <- mijene_ready_todayPLUS4 %>%
   geom_vline(data = data_frame(sad = Sys.time()), aes(xintercept = sad)) +
   coord_cartesian(ylim = c(0.1, max(mijene$visina, na.rm = TRUE))) +
   scale_x_datetime(limits = dani_na_grafu,
-                   breaks = brejks,
-                   date_minor_breaks = "1 hour",
-                   labels = function(x) if_else(is.na(lag(x)) | !day(lag(x)) == day(x),
-                                                paste(hour(x), "\n", nice_date(x, plus = TRUE), "  "),  #  wday(x, label = TRUE)),
-                                                paste(hour(x)))) +
+                   # breaks = brejks,
+                   date_breaks = "3 hour",
+                   date_minor_breaks = "1 hour",  #  ,
+                   # labels = function(x) if_else(is.na(lag(x)) | !day(lag(x)) == day(x),
+                   #                              paste(hour(x), "\n", nice_date(x, plus = TRUE), "  "),  #  wday(x, label = TRUE)),
+                   #                              paste(hour(x))),
+                   labels = scales::date_format("%b %d - %H:%M")) +
   labs(subtitle = paste("Split --", "generated on:", Sys.time()),
        x = "", y = "razina mora") +
   theme_dark() +
