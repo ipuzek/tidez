@@ -53,16 +53,17 @@ lasci.dan <- lasci %>%
 nau <- lubridate::now()
 lubridate::hour(nau) <- 0
 lubridate::minute(nau) <- 0
+lubridate::second(nau) <- 0
 
 dani_na_grafu <- c(
   nau,
-  nau + 4*3600*24) %>% 
+  nau + 3*3600*24) %>% 
   anytime()
 
-brejks <- seq.POSIXt(
-  from = dani_na_grafu[1],
-  to = dani_na_grafu[2],
-  by = "3 hour")
+# brejks <- seq.POSIXt(
+#   from = dani_na_grafu[1],
+#   to = dani_na_grafu[2],
+#   by = "3 hour")
 
 mikroplot_final <- mijene_ready_todayPLUS4 %>% 
   ggplot() +

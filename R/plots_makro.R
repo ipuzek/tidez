@@ -52,8 +52,6 @@ najvisa_plima_vrijeme <- left_join(
   plime_valid %>% thicken("day")
           )
 
-View(najvisa_plima_vrijeme)
-
 lubridate::day(najvisa_plima_vrijeme$vrijeme) <- 1
 lubridate::month(najvisa_plima_vrijeme$vrijeme) <- 1
 lubridate::year(najvisa_plima_vrijeme$vrijeme) <- 1
@@ -89,5 +87,5 @@ najvisa_plima_vrijeme %>%
   theme_dark()
 
 
-ggsejv(filename = "plima_makro_zd.svg",
+ggsejv(filename = here("out", "plots", "plima_makro_zd.svg"),
        AA = "A4.l")
