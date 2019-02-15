@@ -75,7 +75,7 @@ mikroplot_final <- mijene_ready_todayPLUS4 %>%
   geom_point(aes(x = vrijeme, y = visina, colour = mijena), show.legend = FALSE) +
   geom_text(aes(x = vrijeme, y = visina, label = samo_vrijeme_plima), nudge_y = .02, colour = "white") +
   ggalt::geom_xspline(aes(x = vrijeme, y = visina), colour = "grey80") +
-  geom_vline(data = data_frame(sad = Sys.time()), aes(xintercept = sad)) +
+  geom_vline(data = tibble(sad = Sys.time()), aes(xintercept = sad)) +
   coord_cartesian(ylim = c(0.1, max(mijene$visina, na.rm = TRUE))) +
   scale_x_datetime(limits = dani_na_grafu,
                    # breaks = brejks,
